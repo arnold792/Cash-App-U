@@ -437,19 +437,19 @@ export default function App() {
 
       {/* Modal for Create/Edit */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-neutral-900 rounded-xl p-6 w-full max-w-md">
-            <h2 className="text-2xl font-bold text-white mb-4">
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-neutral-900 rounded-xl p-4 sm:p-6 w-full max-w-md my-8 sm:my-auto">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">
               {editingTransaction ? "Edit Transaction" : "Add Transaction"}
             </h2>
 
-            <div className="space-y-4">
+            <div className="space-y-3 sm:space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
               {/* Profile Image Upload Section */}
               <div>
-                <label className="block text-gray-400 text-sm mb-2">
+                <label className="block text-gray-400 text-xs sm:text-sm mb-2">
                   Profile Image
                 </label>
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   {/* Image Preview */}
                   {imagePreview && !imageError && (
                     <div className="relative">
@@ -474,7 +474,7 @@ export default function App() {
 
                   {/* Upload File Button */}
                   <div>
-                    <label className="block w-full bg-neutral-800 text-white p-3 rounded-lg cursor-pointer hover:bg-neutral-700 transition text-center">
+                    <label className="block w-full bg-neutral-800 text-white p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-neutral-700 transition text-center text-sm sm:text-base">
                       <input
                         type="file"
                         accept="image/*"
@@ -494,7 +494,7 @@ export default function App() {
                     name="imageUrl"
                     value={formData.imageUrl}
                     onChange={handleInputChange}
-                    className="w-full bg-neutral-800 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full bg-neutral-800 text-white p-2 sm:p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
                     placeholder="Enter image URL (e.g., https://example.com/image.jpg)"
                   />
                   {imageError && (
@@ -506,7 +506,7 @@ export default function App() {
               </div>
 
               <div>
-                <label className="block text-gray-400 text-sm mb-1">
+                <label className="block text-gray-400 text-xs sm:text-sm mb-1">
                   Name <span className="text-red-400">*</span>
                 </label>
                 <input
@@ -514,14 +514,14 @@ export default function App() {
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-800 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full bg-neutral-800 text-white p-2 sm:p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
                   placeholder="Enter name"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-gray-400 text-sm mb-1">
+                <label className="block text-gray-400 text-xs sm:text-sm mb-1">
                   Description
                 </label>
                 <input
@@ -529,25 +529,25 @@ export default function App() {
                   name="desc"
                   value={formData.desc}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-800 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full bg-neutral-800 text-white p-2 sm:p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
                   placeholder="Enter description"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-400 text-sm mb-1">Time</label>
+                <label className="block text-gray-400 text-xs sm:text-sm mb-1">Time</label>
                 <input
                   type="text"
                   name="time"
                   value={formData.time}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-800 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full bg-neutral-800 text-white p-2 sm:p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
                   placeholder="e.g., 9:18PM"
                 />
               </div>
 
               <div>
-                <label className="block text-gray-400 text-sm mb-1">
+                <label className="block text-gray-400 text-xs sm:text-sm mb-1">
                   Amount <span className="text-red-400">*</span>
                 </label>
                 <input
@@ -555,7 +555,7 @@ export default function App() {
                   name="amount"
                   value={formData.amount}
                   onChange={handleInputChange}
-                  className="w-full bg-neutral-800 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500"
+                  className="w-full bg-neutral-800 text-white p-2 sm:p-3 rounded-lg outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
                   placeholder="Enter amount (e.g., 1000)"
                   min="0"
                   step="0.01"
@@ -564,7 +564,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="flex gap-3 mt-6">
+            <div className="flex gap-2 sm:gap-3 mt-4 sm:mt-6">
               <button
                 onClick={() => {
                   setShowModal(false);
@@ -573,14 +573,14 @@ export default function App() {
                   setImagePreview(null);
                   setImageError(false);
                 }}
-                className="flex-1 bg-neutral-800 text-white p-3 rounded-lg hover:bg-neutral-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 bg-neutral-800 text-white p-2 sm:p-3 rounded-lg hover:bg-neutral-700 transition disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                 disabled={isSubmitting}
               >
                 Cancel
               </button>
               <button
                 onClick={handleSave}
-                className="flex-1 bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                className="flex-1 bg-green-500 text-white p-2 sm:p-3 rounded-lg hover:bg-green-600 transition font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-sm sm:text-base"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? (
