@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 
 // Load transactions from localStorage or use default
 const loadTransactionsFromStorage = () => {
@@ -77,6 +77,7 @@ export default function App() {
   const [imagePreview, setImagePreview] = useState(null);
   const [imageError, setImageError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const searchInputRef = useRef(null);
 
   // Save to localStorage whenever transactions change
   useEffect(() => {
@@ -318,6 +319,7 @@ export default function App() {
           />
         </svg>
         <input
+          ref={searchInputRef}
           type="text"
           placeholder="Search transactions"
           value={searchQuery}
@@ -598,40 +600,48 @@ export default function App() {
         </div>
       )}
 
-      {/* Bottom nav */}
-      <div className="fixed bottom-0 left-0 w-full bg-black border-t border-neutral-800 py-4 flex justify-around items-center">
-        <div className="flex items-center gap-2">
-          <span className="text-white font-bold">$44.9K</span>
-          <div className="w-6 h-6 bg-neutral-800 rounded"></div>
-        </div>
-        <div className="flex gap-6">
-          <div className="text-green-500 text-xl cursor-pointer">$</div>
-          <svg
-            className="w-6 h-6 text-gray-400 cursor-pointer"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
+      {/* Bottom nav - Fixed Footer - Centered */}
+      <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-sm bg-black border-t border-neutral-800 py-3">
+        <div className="flex items-center justify-center gap-8 px-6">
+          {/* Balance */}
+          <span className="text-white font-bold text-sm">$44.9K</span>
+
+          {/* Photo Icon */}
+          <button className="p-2 hover:bg-neutral-800 rounded-full transition-all duration-200 active:scale-95" title="Photos">
+            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </button>
+
+          {/* Dollar Icon */}
+          <button className="p-2 hover:bg-neutral-800 rounded-full transition-all duration-200 active:scale-95" title="Money">
+            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
+
+          {/* Search Icon */}
+          <button
+            onClick={() => {
+              if (searchInputRef.current) {
+                searchInputRef.current.focus();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+            className="p-2 hover:bg-neutral-800 rounded-full transition-all duration-200 active:scale-95"
+            title="Search"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-          <svg
-            className="w-6 h-6 text-gray-400 cursor-pointer"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
+            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+
+          {/* Clock Icon */}
+          <button className="p-2 hover:bg-neutral-800 rounded-full transition-all duration-200 active:scale-95" title="Activity">
+            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
